@@ -29,5 +29,4 @@ handleMinusButton = () => {
   }
 }
 
-
 export default App;

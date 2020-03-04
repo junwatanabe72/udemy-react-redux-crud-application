@@ -1,14 +1,22 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import {Link} from 'react-router-dom'
 import { readEvents } from '../actions'
 
-class EventIndex extends Component{
+class EventsIndex extends Component{
   componentDidMount(){
     this.props.readEvents()
   }
 
 renderEvents(){
+  // return this.props.events.map(event =>(
+  //   <tr key={event.id}>
+  //     <td>{event.id}</td>
+  //     <td>{event.title}</td>
+  //     <td>{event.body}</td>
+  //   </tr>
+  // ))
   return _.map(this.props.events,event =>(
     <tr key={event.id}>
       <td>{event.id}</td>
@@ -18,9 +26,9 @@ renderEvents(){
   ))
 }
 
-
   render(){
     return (
+      <React.Fragment>
         <table>
             <thead>
               <tr>
@@ -33,6 +41,8 @@ renderEvents(){
               {this.renderEvents()}
             </tbody>
         </table>
+        <Link to="/events/new">new</Link>
+      </React.Fragment>
     )
   }
 }
@@ -41,4 +51,4 @@ const mapStateToProps = state => ({events: state.events})
 const mapDispatchToProps = ({readEvents})
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(EventIndex)
+export default connect(mapStateToProps,mapDispatchToProps)(EventsIndex)
